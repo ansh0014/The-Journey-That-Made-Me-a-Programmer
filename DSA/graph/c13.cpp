@@ -2,36 +2,40 @@
 // i think this question use indegree and outdegree concept
 // i have to find the safe node safe node is that node which is terminal node or node which is connected with terminal node
 // terminal node is that node which has not outoging
-// i have to used topological sort we used dfs for making stack to check i have to use visited
+// i have to used topological sort using khan's algorithm
 #include<bits/stdc++.h>
 using namespace std;
 class Solution{
     public:
-    bool dfs(int node, vector<vector<int>>& graph,vector<int>& visited){
-        if(visited[node]==1){
-            return true;
-        }
-        if(visited[node]==2){
-            return false;
-        }
-        visited[node]=1;
-        for(auto it:graph[node]){
-            if(!dfs(it,graph,visited)){
-                return false;
-            }
-        }
-        visited[node]=2;
-        return true;
-    }
-    vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
+    vector<int> eventualSafeNodes(vector<vector<int>>& graph){
         int n=graph.size();
-        vector<int>visited(n,0);
-        vector<int>safeNodes;
+        vector<int> indegree(n,0);
+        vector<vector<int>> adj(n);
         for(int i=0;i<n;i++){
-            if(dfs(i,graph,visited)){
-                safeNodes.push_back(i);
+            for(int j:graph[i]){
+                adj[j].push_back(i);
+                indegree[i]++;
             }
         }
+        queue<int> q;
+        for(int i=0;i<n;i++){
+            if(indegree[i]==0){
+                q.push(i);
+            }
+        }
+        vector<int> safeNodes;
+        while(!q.empty()){
+            int node=q.front();
+            q.pop();
+            safeNodes.push_back(node);
+            for(int neighbour:adj[node]){
+                indegree[neighbour]--;
+                if(indegree[neighbour]==0){
+                    q.push(neighbour);
+                }
+            }
+        }
+        sort(safeNodes.begin(),safeNodes.end());
         return safeNodes;
     }
 };
