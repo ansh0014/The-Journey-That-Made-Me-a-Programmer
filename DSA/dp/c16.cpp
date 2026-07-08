@@ -33,9 +33,10 @@
 // }
 // now we are doing the same subtsring question using the logic of the state machine
 #include<bits/stdc++.h>
+using namespace std;
 int n;
 
-dp[1000100][5];
+int dp[1000100][5];
 using namespace std;
 int rec(int level,int match){
 if(match==4) return 0;
@@ -43,13 +44,13 @@ if(level==n) return 1;
 if(dp[level][match]!=-1) return dp[level][match];
 int ans=0;
 if(match==0){
-    ans=dp(level+1,0)+dp(level+1,1);
+    ans=rec(level+1,0)+rec(level+1,1);
 }else if(match==1){
-    ans=dp(level+1,2)+dp(level+1,1);
+    ans=rec(level+1,2)+rec(level+1,1);
 }else if(match==2){
-    ans=dp(level+1,3)+dp(level+1,2);
+    ans=rec(level+1,3)+rec(level+1,2);
 }else if(match==3){
-    ans=dp(level+1,4)+dp(level+1,3);
+    ans=rec(level+1,4)+rec(level+1,3);
 }
 
 return dp[level][match]=ans;

@@ -2,7 +2,7 @@
 // first we do the recursive way then we move to iterative way
 #include<bits/stdc++.h>
 using namespace std;
-int dp[1001][1001]
+int dp[1001][1001];
 int rec(int x, int y){
 // puring 
 //  base case
@@ -68,7 +68,7 @@ for(int x=0;x<=a;x++){
 cout<<dp[a][b]<<endl;
 }
 int main(){
-    ios_base::sync_with_studio(0);
+    ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
     int t=1;
