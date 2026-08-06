@@ -1,0 +1,4 @@
+// now i am doing the maximum product of the length of two plandromic subsequences
+// i have given a string s find two disjoint plaindromic subsequences of s such that the product of their lenghts is maximized. The two subsequence are disjoint if they do not both pick a character at the same index
+// return the maximum possible product of the lengths of the two plandromix subesquences
+// a subsequences is the string that can be derived from another string by deleting some or no charactes without changing the order of the reamining characters. A string is plindromic if it reads the smae forward and backward
