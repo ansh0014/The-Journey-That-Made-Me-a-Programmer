@@ -63,26 +63,44 @@ auto getYIndex=[&](int val){
 };
 int m=y.size();
 vector<int>dp1(n);
-SegmentTree seg1(m);
-for(int i=0;i<n;i++){
-    int yIndex=getYIndex(points[i][1]);
+SegmentTree segTree(m);
+int i=0;
+while(i<n){
+    int j=i;
+    while(j<n && points[j][0]==points[i][0]) j++;
+    for(int k=i;k<j;k++){
+    int yIndex=getYIndex(points[k][1]);
     int best=0;
-    if(yIndex>1) best=seg1.query(1,1,m,1,yIndex-1);
-    dp1[i]=best+1;
-    seg1.update(1,1,m,yIndex,dp1[i]);
-
+    if(yIndex>1) best=segTree.query(1, 1, m, 1, yIndex-1);
+    dp1[k]=best+1;
+    }
+    // now we update the segment tree
+    for(int k=i;k<j;k++){
+        int yIndex=getYIndex(points[k][1]);
+        segTree.update(1, 1, m, yIndex, dp1[k]);
+    }
+    i=j;
 }
-vector<int>dp2(n);
-SegmentTree seg2(m);
-for(int i=n-1;i>=0;i--){
-    int revYIndex=getYIndex(points[i][1])+1;
-    int best=0;
-    if(revYIndex>1) best=seg2.query(1,1,m,1,revYIndex-1);
-    dp2[i]=best+1;
-    seg2.update(1,1,m,revYIndex,dp2[i]);
 
+vector<int>dp2(n);
+segTree=SegmentTree(m);
+i=n-1;
+while(i>=0){
+    int j=i;
+    while(j>=0 && points[j][0]==points[i][0]) j--;
+    for(int k=i;k>j;k--){
+        int yIndex=getYIndex(points[k][1]);
+        int best=0;
+        if(yIndex<m) best=segTree.query(1, 1, m, yIndex+1, m);
+        dp2[k]=best+1;
+    }
+    for(int k=i;k>j;k--){
+        int yIndex=getYIndex(points[k][1]);
+        segTree.update(1, 1, m, yIndex, dp2[k]);
+    }
+    i=j;
 }
 return dp1[pos]+dp2[pos]-1;
-
 }
+
 };
