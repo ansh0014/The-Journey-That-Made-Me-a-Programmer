@@ -11,6 +11,29 @@ using namespace std;
 class Solution{
     public:
     bool checkValidGrid(vector<vector<int>>& grid) {
+int n=grid.size();
+if(grid[0][0]!=0) return false;
+vector<vector<int>> vis(n,vector<int>(n,0));
+queue<pair<int,int>> q;
+q.push({0,0});
+vis[0][0]=1;
+while(!q.empty()){
+    int x=q.front().first;
+    int y=q.front().second;
+    q.pop();
+    int val=grid[x][y];
+    if(val==n*n-1) return true;
+    vector<pair<int,int>> moves={{-2,-1},{-2,1},{-1,-2},{-1,2},{1,-2},{1,2},{2,-1},{2,1}};
+    for(auto move:moves){
+        int newX=x+move.first;
+        int newY=y+move.second;
+        if(newX>=0 && newX<n && newY>=0 && newY<n && !vis[newX][newY] && grid[newX][newY]==val+1){
+            vis[newX][newY]=1;
+            q.push({newX,newY});
+        }
+    }
 
+}
+return false;
     }
 };

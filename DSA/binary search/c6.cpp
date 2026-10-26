@@ -1,5 +1,5 @@
 // now i am doing the heaters question
-// i understadn i have give the postion of heaters and position of house
+// i understand i have give the postion of heaters and position of house
 // i have to find the minimum radius of heaters to cover all the house
 // for we use the binary search approach
 // the bianrsy serch is used to find the nearest heater for each house and then we can find the maximum distance between the house and the nearest heater

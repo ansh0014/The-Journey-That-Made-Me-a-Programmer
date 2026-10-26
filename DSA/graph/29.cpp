@@ -1,0 +1,4 @@
+// A compnay has n employess, with a unique ID for each employee from 0 to n-1. The head of the company is the one with headID
+// Each employee has one direct manager given in the manager array where manager[i] is the direct manager of i-th employee, manager[headID]=-1. Also, it is guaranteed that the subordination relationships have a tree structure.
+// the head of the company wants to inform all the compnay employees of urgent piece of news. he will inform his direct subordinates, and they will inform their subordinates and so on until all employess know about the urgent news/
+// the i-th employee needs informTime[i] 
